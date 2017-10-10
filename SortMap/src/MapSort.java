@@ -2,18 +2,22 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class MapSort {
 	
 	private static class Employee {
         public String name;
-        public String dep;
+        
 
-        public Employee(String name, String dep) {
+        public Employee(String name) {
             this.name = name;
-            this.dep = dep;
+            
         }
 
         @Override
@@ -25,9 +29,9 @@ public class MapSort {
     public static void main(String[] args) {
         Map<Integer, Employee> map = new HashMap<Integer, Employee>();
 
-        map.put(1, new MapSort.Employee("x","finance"));
-        map.put(2, new MapSort.Employee("a","marketing"));
-        map.put(3, new MapSort.Employee("f","QA"));
+        map.put(1, new MapSort.Employee("x"));
+        map.put(2, new MapSort.Employee("a"));
+        map.put(3, new MapSort.Employee("f"));
 
         List<Map.Entry<Integer, Employee>> entryList = new ArrayList<Map.Entry<Integer, Employee>>(map.entrySet());
 
@@ -43,6 +47,11 @@ public class MapSort {
         );
 
         System.out.println(entryList);
+        Map<Integer, Employee> sortedMap = new LinkedHashMap<Integer, Employee>();
+        for(Entry<Integer, Employee> item : entryList){
+            sortedMap.put(item.getKey(), item.getValue());
+        }
+        System.out.println(sortedMap);
     }
 
 }
